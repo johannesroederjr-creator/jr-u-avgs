@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Platzhalter für das Porträt von Johannes Röder">
+  <!-- Platzhalter  später durch echtes Porträtfoto ersetzen (Seitenverhältnis 3:4) -->
+  <defs>
+    <linearGradient id="pj" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#EAF0F7"/>
+      <stop offset="1" stop-color="#D8E3F0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#pj)"/>
+  <g fill="none" stroke="#002858" stroke-opacity="0.09" stroke-width="20" stroke-linecap="round">
+    <path d="M-40 190 C 140 110, 420 120, 660 210"/>
+    <path d="M-40 620 C 140 540, 420 550, 660 640"/>
+  </g>
+  <g fill="none" stroke="#18A870" stroke-opacity="0.14" stroke-width="20" stroke-linecap="round">
+    <path d="M-40 405 C 140 325, 420 335, 660 425"/>
+  </g>
+  <!-- abstrakte Personen-Silhouette -->
+  <g fill="#002858" fill-opacity="0.28">
+    <circle cx="300" cy="330" r="78"/>
+    <path d="M160 560 C 160 470, 220 428, 300 428 C 380 428, 440 470, 440 560 Z"/>
+  </g>
+  <text x="300" y="650" text-anchor="middle" font-family="Sora, Segoe UI, sans-serif" font-size="26" font-weight="700" fill="#002858" fill-opacity="0.65">Platzhalter</text>
+  <text x="300" y="688" text-anchor="middle" font-family="Inter, Segoe UI, sans-serif" font-size="20" fill="#5B6B7B">Porträt Johannes Röder · 3:4</text>
+</svg>

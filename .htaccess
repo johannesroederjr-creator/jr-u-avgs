@@ -1,0 +1,86 @@
+# =============================================================
+# .htaccess – Johannes Röder Unternehmensberatung
+# Für Apache-Webspace (Strato). Diese Datei gehört in das
+# Wurzelverzeichnis der Website.
+#
+# Hinweis: Beginnt mit einem Punkt und ist im Windows-Explorer
+# unter Umständen ausgeblendet. Im FTP-Programm ggf. die Anzeige
+# versteckter Dateien aktivieren, damit sie mit hochgeladen wird.
+# =============================================================
+
+# --- Zeichensatz ---------------------------------------------
+AddDefaultCharset UTF-8
+
+# --- Eigene Fehlerseite --------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Weiterleitungen -----------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Immer HTTPS erzwingen
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # Einheitliche Domain mit www (vermeidet doppelte Inhalte).
+  # Falls die Seite ohne www laufen soll, diesen Block anpassen.
+  RewriteCond %{HTTP_HOST} ^johannes-roeder-unternehmensberatung\.de$ [NC]
+  RewriteRule ^(.*)$ https://www.johannes-roeder-unternehmensberatung.de/$1 [R=301,L]
+
+  # Alte URLs der bisherigen Website auf die neuen Seiten führen
+  RewriteRule ^impressum/?$ /impressum.html [R=301,L]
+  RewriteRule ^datenschutz/?$ /datenschutz.html [R=301,L]
+  RewriteRule ^agb/?$ /agb.html [R=301,L]
+</IfModule>
+
+# --- Komprimierung (wichtig für Ladezeit und Core Web Vitals) -
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Browser-Caching -----------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Schriften und Bilder ändern sich selten
+  ExpiresByType font/woff2        "access plus 1 year"
+  ExpiresByType image/png         "access plus 6 months"
+  ExpiresByType image/jpeg        "access plus 6 months"
+  ExpiresByType image/webp        "access plus 6 months"
+  ExpiresByType image/svg+xml     "access plus 6 months"
+  ExpiresByType image/x-icon      "access plus 6 months"
+
+  # Stylesheet und Skript: kürzer, damit Änderungen ankommen
+  ExpiresByType text/css          "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+
+  # HTML immer frisch prüfen
+  ExpiresByType text/html         "access plus 0 seconds"
+</IfModule>
+
+# --- Sicherheits-Header --------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+  # Schriften dürfen aus dem Cache ohne erneute Prüfung kommen
+  <FilesMatch "\.(woff2|png|jpg|jpeg|svg|webp|ico)$">
+    Header set Cache-Control "public, max-age=15552000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# --- Korrekte MIME-Typen -------------------------------------
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# --- Verzeichnisauflistung unterbinden -----------------------
+Options -Indexes

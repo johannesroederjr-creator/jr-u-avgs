@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Platzhalter für ein Bild einer Beratungssituation">
+  <!-- Platzhalter  später durch echtes Bild ersetzen (Seitenverhältnis 3:2) -->
+  <defs>
+    <linearGradient id="pb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E7F4EE"/>
+      <stop offset="1" stop-color="#EAF0F7"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#pb)"/>
+  <g fill="none" stroke-linecap="round">
+    <g stroke="#002858" stroke-opacity="0.09" stroke-width="22">
+      <path d="M-40 170 C 220 90, 660 100, 960 200"/>
+      <path d="M-40 430 C 220 350, 660 360, 960 460"/>
+    </g>
+    <g stroke="#18A870" stroke-opacity="0.15" stroke-width="22">
+      <path d="M-40 300 C 220 220, 660 230, 960 330"/>
+    </g>
+  </g>
+  <!-- zwei Personen im Gespräch, stark abstrahiert -->
+  <g fill="#002858" fill-opacity="0.26">
+    <circle cx="360" cy="240" r="52"/>
+    <path d="M270 400 C 270 340, 312 312, 360 312 C 408 312, 450 340, 450 400 Z"/>
+  </g>
+  <g fill="#0E6B48" fill-opacity="0.26">
+    <circle cx="540" cy="240" r="52"/>
+    <path d="M450 400 C 450 340, 492 312, 540 312 C 588 312, 630 340, 630 400 Z"/>
+  </g>
+  <text x="450" y="470" text-anchor="middle" font-family="Sora, Segoe UI, sans-serif" font-size="26" font-weight="700" fill="#002858" fill-opacity="0.65">Platzhalter</text>
+  <text x="450" y="506" text-anchor="middle" font-family="Inter, Segoe UI, sans-serif" font-size="20" fill="#5B6B7B">Beratungssituation · 3:2</text>
+</svg>

@@ -1,0 +1,14 @@
+# robots.txt – Johannes Röder Unternehmensberatung
+# Alle Inhalte dürfen indexiert werden. Es gibt keine technischen
+# Pfade, die ausgeschlossen werden müssten.
+
+User-agent: *
+Allow: /
+
+# Interne Arbeitsdateien, die nicht in den Index gehören.
+# (Sie müssen ohnehin nicht auf den Server hochgeladen werden –
+#  siehe README, Abschnitt "Was hochgeladen wird".)
+Disallow: /content/
+Disallow: /tools/
+
+Sitemap: https://www.johannes-roeder-unternehmensberatung.de/sitemap.xml
