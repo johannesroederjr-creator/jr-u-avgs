@@ -1508,9 +1508,19 @@ strong, b { font-weight: 600; color: var(--navy); }
 .prose li::marker { color: var(--green-dark); font-weight: 600; }
 .prose a { color: var(--green-dark); font-weight: 500; }
 .prose hr { margin-block: var(--sp-8); border: 0; border-top: 1px solid var(--grey-line); }
-.prose table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
-.prose th, .prose td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--grey-line); text-align: left; }
-.prose th { font-family: var(--font-head); color: var(--navy); }
+.prose-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose table { width: 100%; min-width: 28rem; border-collapse: collapse; font-size: 0.9375rem; }
+.prose th, .prose td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--grey-line); text-align: left; vertical-align: top; }
+.prose th { font-family: var(--font-head); color: var(--navy); background: var(--ice); }
+.prose .callout p { margin: 0; }
+.prose .checklist,
+.prose .steps { padding-left: 0; list-style: none; }
+.prose .checklist li { padding-left: 2rem; }
+.prose .step { padding-left: 0; }
+.prose .step__body h3 { margin-top: 0; }
 .prose blockquote {
   margin: 0;
   padding: var(--sp-5) var(--sp-6);
