@@ -41,29 +41,74 @@
     var nav = document.getElementById('primary-nav');
     if (!toggle || !nav) return;
 
+    var submenus = nav.querySelectorAll('.nav__item--submenu');
+
+    function closeSubmenus() {
+      submenus.forEach(function (item) {
+        item.classList.remove('is-open');
+        var trigger = item.querySelector('.nav__trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+
     function close() {
       nav.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Menü öffnen');
+      closeSubmenus();
     }
 
     function open() {
       nav.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Menü schließen');
+      var activeSubmenu = nav.querySelector('.nav__item--submenu.nav__item--active');
+      if (activeSubmenu) {
+        activeSubmenu.classList.add('is-open');
+        var activeTrigger = activeSubmenu.querySelector('.nav__trigger');
+        if (activeTrigger) activeTrigger.setAttribute('aria-expanded', 'true');
+      }
     }
 
     toggle.addEventListener('click', function () {
       if (nav.classList.contains('is-open')) { close(); } else { open(); }
     });
 
-    // Nach Klick auf einen Menüpunkt schließen
+    submenus.forEach(function (item) {
+      var trigger = item.querySelector('.nav__trigger');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var isOpen = item.classList.contains('is-open');
+        closeSubmenus();
+        if (!isOpen) {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('.nav__item--submenu')) closeSubmenus();
+    });
+
+    // Nach Klick auf einen Link schließen (Untermenü-Trigger ausgenommen)
     nav.addEventListener('click', function (event) {
+      if (event.target.closest('.nav__trigger')) return;
       if (event.target.closest('a')) close();
     });
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+      if (event.key !== 'Escape') return;
+      var openSubmenu = nav.querySelector('.nav__item--submenu.is-open');
+      if (openSubmenu) {
+        closeSubmenus();
+        var submenuTrigger = openSubmenu.querySelector('.nav__trigger');
+        if (submenuTrigger) submenuTrigger.focus();
+        return;
+      }
+      if (nav.classList.contains('is-open')) {
         close();
         toggle.focus();
       }

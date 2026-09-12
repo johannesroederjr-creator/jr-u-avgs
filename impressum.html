@@ -69,7 +69,18 @@ gtag('consent', 'default', {
         <li><a class="nav__link" href="index.html#ablauf">Ablauf</a></li>
         <li><a class="nav__link" href="index.html#gruendungszuschuss">Gründungszuschuss</a></li>
         <li><a class="nav__link" href="index.html#ueber-uns">Über uns</a></li>
-        <li><a class="nav__link" href="blog/index.html">Wissen</a></li>
+        <li class="nav__item nav__item--submenu">
+          <button type="button" class="nav__link nav__trigger" aria-expanded="false" aria-controls="nav-wissen-submenu">
+            Wissen
+            <svg class="nav__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="nav__submenu" id="nav-wissen-submenu">
+            <li><a class="nav__sublink" href="blog/index.html">Alle Beiträge</a></li>
+            <li><a class="nav__sublink" href="blog/avgs-coaching-ablauf-dauer-inhalte.html">AVGS-Coaching: Ablauf</a></li>
+            <li><a class="nav__sublink" href="blog/avgs-gutschein-was-ist-das.html">AVGS-Gutschein erklärt</a></li>
+            <li><a class="nav__sublink" href="blog/gruendungszuschuss-beantragen.html">Gründungszuschuss beantragen</a></li>
+          </ul>
+        </li>
         <li><a class="nav__link" href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <a class="btn btn--primary btn--compact" href="index.html#kontakt">Kostenfreies Erstgespräch</a>
