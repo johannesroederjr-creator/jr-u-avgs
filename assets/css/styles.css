@@ -1676,7 +1676,7 @@ strong, b { font-weight: 600; color: var(--navy); }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: minmax(0, 1fr); }
   .quotes { columns: 1; }
   .team-card { grid-template-columns: minmax(0, 1fr); }
-  .team-card__media { aspect-ratio: 4 / 3; }
+  .team-card__media { aspect-ratio: 3 / 4; }
   .form-grid { grid-template-columns: minmax(0, 1fr); }
   .footer__top { grid-template-columns: minmax(0, 1fr); }
   .step { grid-template-columns: 52px minmax(0, 1fr); gap: var(--sp-4); }
