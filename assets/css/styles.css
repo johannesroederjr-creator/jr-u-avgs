@@ -1235,6 +1235,7 @@ strong, b { font-weight: 600; color: var(--navy); }
   width: 76px; height: 76px;
   border-radius: var(--r-pill);
   object-fit: cover;
+  object-position: 50% 15%;
   background: var(--ice);
 }
 .author-box h3 { margin-bottom: var(--sp-1); font-size: 1.0625rem; }
