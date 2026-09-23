@@ -704,6 +704,33 @@ strong, b { font-weight: 600; color: var(--navy); }
   color: var(--grey);
 }
 
+.hero__quote {
+  margin-top: var(--sp-6);
+  max-width: 34em;
+  padding: var(--sp-5) var(--sp-6);
+  border: 1px solid var(--grey-line);
+  border-radius: var(--r-lg);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow-sm);
+}
+.hero__quote-text {
+  margin: 0 0 var(--sp-2);
+  font-size: 0.9688rem;
+  line-height: 1.55;
+  color: var(--navy);
+  font-style: italic;
+}
+.hero__quote-meta {
+  margin: 0 0 var(--sp-4);
+  font-size: 0.875rem;
+  color: var(--grey);
+}
+.hero__quote-meta strong {
+  font-weight: 600;
+  color: var(--navy);
+}
+.hero__quote-link { font-size: 0.875rem; }
+
 /* Bildseite: organische Form + Layering */
 .hero__media { position: relative; }
 .hero__blob {
