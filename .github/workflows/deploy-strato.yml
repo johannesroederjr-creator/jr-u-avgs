@@ -1,0 +1,110 @@
+name: Deploy to Strato
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-strato
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare deploy bundle
+        run: |
+          rsync -a --delete \
+            --exclude .git \
+            --exclude .github \
+            --exclude .gitignore \
+            --exclude content \
+            --exclude tools \
+            --exclude deploy \
+            --exclude README.md \
+            --exclude 'Briefing_*.md' \
+            --exclude '*.md' \
+            --exclude Bewertungen_Kunden.txt \
+            ./ deploy/
+
+      # STRATO_SFTP_PATH = johannes-roeder-unternehmensberatung.de  (Webroot der Domain, ohne führendes /)
+      - name: Upload to Strato via SFTP
+        env:
+          SFTP_HOST: ${{ secrets.STRATO_SFTP_HOST }}
+          SFTP_USER: ${{ secrets.STRATO_SFTP_USER }}
+          SFTP_PASS: ${{ secrets.STRATO_SFTP_PASSWORD }}
+          SFTP_PATH: ${{ secrets.STRATO_SFTP_PATH }}
+        run: |
+          pip install paramiko
+          python <<'PY'
+          import os
+          import paramiko
+
+          def normalize_remote_base(path):
+              path = (path or ".").strip()
+              if path in ("", "/", "."):
+                  return "."
+              return path.strip("/").replace("\\", "/")
+
+          host = os.environ["SFTP_HOST"]
+          user = os.environ["SFTP_USER"]
+          password = os.environ["SFTP_PASS"]
+          remote_base = normalize_remote_base(os.environ.get("SFTP_PATH", "."))
+          local_root = "deploy"
+
+          transport = paramiko.Transport((host, 22))
+          transport.connect(username=user, password=password)
+          sftp = paramiko.SFTPClient.from_transport(transport)
+
+          def ensure_remote_dir(remote_dir):
+              if remote_dir in (".", "", "/"):
+                  return
+              current = ""
+              for part in remote_dir.strip("/").split("/"):
+                  current = f"{current}/{part}" if current else part
+                  try:
+                      sftp.stat(current)
+                  except FileNotFoundError:
+                      sftp.mkdir(current)
+
+          def remote_path_for(rel_dir, filename):
+              rel_dir = rel_dir.replace("\\", "/")
+              if rel_dir == ".":
+                  parts = [remote_base] if remote_base != "." else []
+              else:
+                  parts = [remote_base, rel_dir] if remote_base != "." else [rel_dir]
+              parts.append(filename)
+              return "/".join(p for p in parts if p)
+
+          print(f"Remote base: {remote_base!r}")
+          ensure_remote_dir(remote_base)
+
+          uploaded = 0
+          for root, _, files in os.walk(local_root):
+              rel = os.path.relpath(root, local_root)
+              remote_dir = remote_base if rel == "." else f"{remote_base}/{rel.replace(chr(92), '/')}"
+              if remote_base == "." and rel != ".":
+                  remote_dir = rel.replace("\\", "/")
+              ensure_remote_dir(remote_dir)
+              for name in files:
+                  local_path = os.path.join(root, name)
+                  target = remote_path_for(rel, name)
+                  sftp.put(local_path, target)
+                  uploaded += 1
+                  print(f"uploaded: {target}")
+
+          index_remote = remote_path_for(".", "index.html")
+          blog_remote = remote_path_for("blog", "index.html")
+          sftp.stat(index_remote)
+          sftp.stat(blog_remote)
+          print(f"Done. {uploaded} files uploaded.")
+          print(f"Verified: {index_remote}, {blog_remote}")
+
+          sftp.close()
+          transport.close()
+          PY
