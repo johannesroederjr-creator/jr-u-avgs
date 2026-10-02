@@ -672,21 +672,6 @@ strong, b { font-weight: 600; color: var(--navy); }
   align-items: center;
 }
 
-.hero__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  margin-bottom: var(--sp-5);
-  padding: 0.45rem 0.95rem 0.45rem 0.55rem;
-  border: 1px solid rgba(24, 168, 112, 0.28);
-  border-radius: var(--r-pill);
-  background: rgba(231, 244, 238, 0.85);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--green-dark);
-}
-.hero__badge svg { flex: none; }
-
 .hero h1 { margin-bottom: var(--sp-5); }
 .hero h1 em {
   font-style: normal;
