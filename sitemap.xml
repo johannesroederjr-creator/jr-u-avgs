@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  XML-Sitemap  Johannes Rder Unternehmensberatung
+  XML-Sitemap ? Johannes Röder Unternehmensberatung
 
-  Bei jedem neuen Blogbeitrag hier einen weiteren <url>-Block ergnzen
+  Bei jedem neuen Blogbeitrag hier einen weiteren <url>-Block ergänzen
   und das <lastmod>-Datum der betroffenen Seiten aktualisieren.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://www.johannes-roeder-unternehmensberatung.de/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://www.johannes-roeder-unternehmensberatung.de/blog/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
