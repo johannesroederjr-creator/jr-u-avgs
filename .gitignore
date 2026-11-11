@@ -18,3 +18,6 @@ credentials.json
 
 # Logs
 *.log
+
+# Event-Rohfotos (komprimierte Web-Varianten: event-fulda-*.jpg)
+assets/img/Event_Fulda_*.JPG
