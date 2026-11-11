@@ -511,60 +511,7 @@ strong, b { font-weight: 600; color: var(--navy); }
   box-shadow: 0 2px 16px rgba(0, 40, 88, 0.06);
 }
 
-/* Event-Hinweis unter dem Header (zeitlich begrenzt, siehe main.js) */
-.event-bar {
-  position: sticky;
-  top: var(--header-h);
-  z-index: 99;
-  background: var(--mint);
-  border-bottom: 1px solid rgba(24, 168, 112, 0.22);
-  color: var(--grey);
-  font-size: 0.875rem;
-  box-shadow: 0 1px 0 rgba(0, 40, 88, 0.04);
-}
-.event-bar[hidden] { display: none; }
-.event-bar__inner {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-4);
-  min-height: 48px;
-  padding-block: var(--sp-2);
-}
-.event-bar__text {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  margin: 0;
-  min-width: 0;
-  line-height: 1.45;
-  color: var(--grey);
-}
-.event-bar__icon {
-  flex: none;
-  color: var(--green-dark);
-}
-.event-bar__text strong {
-  font-family: var(--font-head);
-  font-weight: 600;
-  color: var(--navy);
-}
-.event-bar__sep { opacity: 0.45; }
-.event-bar__btn {
-  flex: none;
-  width: auto;
-  white-space: nowrap;
-}
-@media (max-width: 720px) {
-  .event-bar__sep--wide,
-  .event-bar__meta { display: none; }
-  .event-bar__inner { gap: var(--sp-3); }
-  .event-bar__text { font-size: 0.8125rem; }
-}
-@media (max-width: 420px) {
-  .event-bar__btn { padding-inline: var(--sp-4); font-size: 0.8125rem; }
-}
+[data-event-bar][hidden] { display: none !important; }
 
 .site-header__inner {
   display: flex;
@@ -808,8 +755,47 @@ strong, b { font-weight: 600; color: var(--navy); }
   background: var(--mint);
   color: var(--green-dark);
 }
-.hero__float-text { font-size: 0.875rem; line-height: 1.45; color: var(--grey); }
-.hero__float-text strong { display: block; font-size: 0.9375rem; color: var(--navy); }
+.hero__float-text { margin: 0; font-size: 0.875rem; line-height: 1.45; color: var(--grey); }
+.hero__float-text strong { display: block; margin-bottom: var(--sp-1); font-size: 1rem; color: var(--navy); }
+.hero__float--event {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-4);
+  max-width: min(19.5rem, 94%);
+  padding: var(--sp-5);
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 36px rgba(0, 27, 61, 0.38);
+}
+.hero__float--event .hero__float-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+.hero__float--event .hero__float-icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: #6FE3B4;
+}
+.hero__float--event .hero__float-text { color: #C3D2E4; }
+.hero__float--event .hero__float-text strong {
+  color: var(--white);
+  font-size: 1.0625rem;
+}
+.hero__float--event .hero__float-btn {
+  width: 100%;
+  font-size: 0.9375rem;
+  background: #E8941A;
+  color: var(--white);
+  border: 2px solid transparent;
+  box-shadow: 0 6px 22px rgba(232, 148, 26, 0.42);
+}
+.hero__float--event .hero__float-btn:hover,
+.hero__float--event .hero__float-btn:focus-visible {
+  background: #D17E10;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(209, 126, 16, 0.48);
+}
 
 /* == 09 Trust-Leiste =========================================
    Liegt überlappend auf der Kante zwischen Hero und Folgesektion.
@@ -1740,8 +1726,8 @@ strong, b { font-weight: 600; color: var(--navy); }
   /* Dekoratives Ornament auf kleinen Bildschirmen weglassen */
   .orbits { display: none; }
   .btn { width: 100%; }
-  .event-bar .event-bar__btn { width: auto; }
   .btn-row .btn { width: auto; flex: 1 1 240px; }
+  .hero__float-btn { width: 100%; }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: minmax(0, 1fr); }
   .quotes { columns: 1; }
   .team-card { grid-template-columns: minmax(0, 1fr); }
@@ -1989,6 +1975,6 @@ strong, b { font-weight: 600; color: var(--navy); }
 }
 
 @media print {
-  .site-header, .event-bar, .site-footer, .nav-toggle, .cta-band, .btn, .cookie-banner, .cookie-modal-overlay { display: none !important; }
+  .site-header, .site-footer, .nav-toggle, .cta-band, .btn, .cookie-banner, .cookie-modal-overlay { display: none !important; }
   body { background: #fff; font-size: 11pt; }
 }
