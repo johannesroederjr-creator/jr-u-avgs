@@ -516,45 +516,54 @@ strong, b { font-weight: 600; color: var(--navy); }
   position: sticky;
   top: var(--header-h);
   z-index: 99;
-  background: linear-gradient(90deg, var(--navy-deep) 0%, var(--navy) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  color: #C3D2E4;
+  background: var(--mint);
+  border-bottom: 1px solid rgba(24, 168, 112, 0.22);
+  color: var(--grey);
   font-size: 0.875rem;
+  box-shadow: 0 1px 0 rgba(0, 40, 88, 0.04);
 }
 .event-bar[hidden] { display: none; }
 .event-bar__inner {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
-  gap: var(--sp-3) var(--sp-5);
-  min-height: 42px;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 48px;
   padding-block: var(--sp-2);
 }
 .event-bar__text {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
   margin: 0;
-  text-align: center;
+  min-width: 0;
   line-height: 1.45;
+  color: var(--grey);
 }
-.event-bar__text strong { color: var(--white); font-weight: 600; }
-.event-bar__sep { opacity: 0.55; }
-.event-bar__cta {
+.event-bar__icon {
   flex: none;
+  color: var(--green-dark);
+}
+.event-bar__text strong {
   font-family: var(--font-head);
-  font-size: 0.875rem;
   font-weight: 600;
-  color: #6FE3B4;
-  text-decoration: none;
+  color: var(--navy);
+}
+.event-bar__sep { opacity: 0.45; }
+.event-bar__btn {
+  flex: none;
+  width: auto;
   white-space: nowrap;
 }
-.event-bar__cta:hover,
-.event-bar__cta:focus-visible {
-  color: var(--white);
-  text-decoration: underline;
+@media (max-width: 720px) {
+  .event-bar__sep--wide,
+  .event-bar__meta { display: none; }
+  .event-bar__inner { gap: var(--sp-3); }
+  .event-bar__text { font-size: 0.8125rem; }
 }
-@media (max-width: 560px) {
-  .event-bar__sep--wide { display: none; }
-  .event-bar__inner { flex-direction: column; gap: var(--sp-1); padding-block: var(--sp-3); }
+@media (max-width: 420px) {
+  .event-bar__btn { padding-inline: var(--sp-4); font-size: 0.8125rem; }
 }
 
 .site-header__inner {
@@ -1731,6 +1740,7 @@ strong, b { font-weight: 600; color: var(--navy); }
   /* Dekoratives Ornament auf kleinen Bildschirmen weglassen */
   .orbits { display: none; }
   .btn { width: 100%; }
+  .event-bar .event-bar__btn { width: auto; }
   .btn-row .btn { width: auto; flex: 1 1 240px; }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: minmax(0, 1fr); }
   .quotes { columns: 1; }
