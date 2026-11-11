@@ -31,6 +31,7 @@
     initOriginButtons();
     initQuoteExpand();
     initCookieConsent();
+    initEventBar();
   });
 
   /* ---------------------------------------------------------
@@ -218,6 +219,23 @@
   function initFooterYear() {
     var el = document.getElementById('current-year');
     if (el) el.textContent = String(new Date().getFullYear());
+  }
+
+  /* ---------------------------------------------------------
+     Event-Streifen: nach data-event-until ausblenden
+     --------------------------------------------------------- */
+  function initEventBar() {
+    var bars = document.querySelectorAll('[data-event-bar]');
+    if (!bars.length) return;
+
+    bars.forEach(function (bar) {
+      var until = bar.getAttribute('data-event-until');
+      if (!until) return;
+      var end = new Date(until + 'T23:59:59');
+      if (!isNaN(end.getTime()) && new Date() > end) {
+        bar.hidden = true;
+      }
+    });
   }
 
   /* ---------------------------------------------------------
